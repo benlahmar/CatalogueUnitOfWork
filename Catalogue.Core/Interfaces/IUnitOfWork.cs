@@ -12,5 +12,6 @@ namespace Catalogue.Core.Interfaces
         IBaseRepository<Categorie> categorieRepository { get; }
         IBaseRepository<Produit> productRepository { get; }
         int complete();
+        Task<int> completeAsyn();
     }
 }

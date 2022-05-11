@@ -13,6 +13,8 @@ namespace Catalogue.Core.Interfaces
     {
         public T add(T entity);
         
+        public Task<T> Save(T entity);
+
         public IEnumerable<T> findAll();
         public T findById(int id);
         public Task<T> findByIdAsync(int id);   

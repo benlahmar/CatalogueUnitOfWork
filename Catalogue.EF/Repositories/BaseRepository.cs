@@ -48,5 +48,12 @@ namespace Catalogue.EF.Repositories
             T? e = await _entities.FindAsync(id);
             return e;
         }
+
+        public async Task<T> Save(T entity)
+        {
+              await _entities.AddAsync(entity);
+
+            return entity;// new Task<T>(()=> entity  );
+        }
     }
 }

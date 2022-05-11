@@ -11,6 +11,11 @@ namespace Catalogue.EF.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         public readonly ApplicationDbContext _ApplicationDbContext;
+
+        public IBaseRepository<Categorie> categorieRepository { get; private set; }
+
+        public IBaseRepository<Produit> productRepository { get; private set; }
+
         public UnitOfWork(ApplicationDbContext ApplicationDbContext)
         {
             _ApplicationDbContext=ApplicationDbContext;
@@ -18,10 +23,7 @@ namespace Catalogue.EF.Repositories
             productRepository= new BaseRepository<Produit>(_ApplicationDbContext);
         }
 
-        public IBaseRepository<Categorie> categorieRepository { get; private set; }
-
-        public IBaseRepository<Produit> productRepository { get; private set; }
-
+       
         public int complete()
         {
             return _ApplicationDbContext.SaveChanges();
@@ -31,5 +33,12 @@ namespace Catalogue.EF.Repositories
         {
             _ApplicationDbContext.Dispose();
         }
+
+        public async Task<int> completeAsyn()
+        {
+          return  await _ApplicationDbContext.SaveChangesAsync();
+        }
+
+        
     }
 }
