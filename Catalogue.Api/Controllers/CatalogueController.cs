@@ -75,12 +75,27 @@ namespace Catalogue.Api.Controllers
         [HttpGet("/produits/{id}")]
         public IActionResult getprd(int id)
         {
-            Produit c = _unitOfWork.productRepository.findById(id);
-            if (c == null)
-                return NoContent();
+
+            Random rand = new Random();
+            int r=rand.Next(10);
+            if (r % 2 == 0)
+               throw new Exception();
             else
-                return Ok(c);
+            {
+                Produit c = _unitOfWork.productRepository.findById(id);
+                if (c == null)
+                    return NoContent();
+                else
+                    return Ok(c);
+            }
             
+        }
+
+        [HttpGet("config")]
+        public String getenv()
+        {
+            
+            return "test";
         }
 
     }
